@@ -47,7 +47,7 @@ HTML 헤더와 유사하다. 숫자가 커질수록 글자 크기가 작아진�
 ```
 
 + #### 인라인 코드 블럭
-\`를 사용한다. <br>
+\`를 사용하여 감싸기. <br>
 `인라인 코드 블럭`
 
 ---
@@ -82,22 +82,22 @@ HTML 헤더와 유사하다. 숫자가 커질수록 글자 크기가 작아진�
 ### \* **링크 넣기**
 
 + #### 이메일 주소 넣기
-\<email@email.com>
+\<email@email.com> <br>
 <email@email.com>
 
 
 + #### 주소 그대로 넣기
-\<http://developmentnotepad.tistory.com>
+\<http://developmentnotepad.tistory.com> <br>
 <http://developmentnotepad.tistory.com>
 
 
 + #### 단어로 넣기
-\[Study-Note](http://developmentnotepad.tistory.com)
+\[Study-Note](http://developmentnotepad.tistory.com) <br>
 [Study-Note](http://developmentnotepad.tistory.com)
 
 
 + #### 내부 링크 넣기
-\[목차](#index)
+\[목차](#index)<br>
 [목차](#index)
 
 
@@ -131,8 +131,8 @@ br
 <br>
 
 \* list item 1 <br>
-	 * list item 1-1 <br>
-     * list item 1-2 <br>
+[tab] * list item 1-1 <br>
+[tab] * list item 1-2 <br>
 <br>
 
 * list item 1
