@@ -90,7 +90,11 @@ console.log(lee.eyes); //2
   - 데이터들의 연결
 - Q. 차이점
 
+
+
 ------
+
+
 
 ## 호이스팅(Hoisting)
 
@@ -163,7 +167,11 @@ a(); //5 출력(정적 유효범위)
 
 이에 따라서 전역변수는 지양하는 것이 좋음.
 
+
+
 ------
+
+
 
 ## 클로저(Closure)
 
@@ -220,7 +228,11 @@ inner(); //호출 시 hello 출력
   * 젼역 영역(Global Scope)를 오염 시키지 않기 위해서 사용한다.
   * 변수와 메소드를 외부 접근으로부터 보호한다.
 
+
+
 ------
+
+
 
 ## Callback
 
@@ -348,7 +360,11 @@ alert(numbers.sort(sortNumber)); // array, [20,10,9,8,7,6,5,4,3,2,1]
       - 지정된 시간마다 `반복 실행`한다.
       - setTimeout, setInterval로 연속적인 함수 호출하여 애니메이션을 구현하는 경우 delay가 발생할 수 있다.
 
+
+
 ------
+
+
 
 ## 모듈화
 
@@ -360,13 +376,13 @@ alert(numbers.sort(sortNumber)); // array, [20,10,9,8,7,6,5,4,3,2,1]
   * 전역변수로 인한 충돌 방지
   * 유지 보수성 향상
 
-## AMD
+### 1. AMD
 
 * `Asynchronous Module Definition`
 * 비동기적 모듈 선언
 * 모듈을 정의하는 방법과 모듈이 필요할 때 비동기로 로딩하는 방법을 정의한 API
 
-## requirejs 
+### 2. RequireJS 
 
 * AMD API 명세를 구현한 구현체
 * 사용 이유
@@ -374,19 +390,92 @@ alert(numbers.sort(sortNumber)); // array, [20,10,9,8,7,6,5,4,3,2,1]
   * 모듈 간의 의존도를 낮추고, 재사용성을 높일 수 있다.
   * 동적인 로딩이 가능하다. (첫 로딩에 필요하지 않은 모듈은 나중에 비동기 형태로 가져온다)
 
-## commonjs
+### 3. CommonJS
+
+
 
 ------
 
-## this 정의
 
-- bind
-- call
-- apply
+
+## this
+
+- **this**의 개념
+
+  - [MDN 참고](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/this)
+  - **생성자(constructor)**
+
+  ~~~javascript
+  function Person(name, age) {
+      this.name = name;
+      this.age = age;
+  }
+  
+  var one = new Person('one', 1);
+  
+  console.log(one.name); //one
+  console.log(one.age); //1
+  ~~~
+
+  - **전역 문맥**
+
+    - 아무 함수에도 속하지 않은 범위에서 `this`는 전역 객체(window)를 참조
+
+    ~~~javascript
+    console.log(this === window); // true
+    
+    a = 37;
+    console.log(window.a); //37
+    ~~~
+
+    ~~~javascript
+    function f1() {
+    	return this;
+    }
+    f1() === window; //true
+    ~~~
+
+  - **함수 문맥**
+
+    - 함수 내부에서  `this`는 호출한 방법에 의해 달라진다.
+    - 함수를 어떤 객체의 메서드로 호출하면 `this`의 값은 그 객체를 사용
+
+    ~~~javascript
+    var o = {
+        prop: 37,
+        f: function() {
+            return this.prop; //o의 prop
+        }
+    };
+    console.log(o.f()); //37
+    ~~~
+
+  - **call, apply**
+
+    * `this`의 값을 한 문맥에서 다른 문맥으로 넘기기 위해 사용한다. (특정 값으로 지정)
+    * `call, apply`와의 차이점
+      * `apply`는 매개변수를 배열로 받는다.
+      * `fun.call(thisArg[, arg1[, arg2[, ...]]])`
+      * `fun.apply(thisArg, [argsArray])`
+        * `thisArg`는 `func` 를 호출하는데 제공될 `this` 의 값
+        * `argsArray`는 `func` 이 호출되어야 하는 인수를 지정하는 유사 배열 객체
+
+  - **bind**
+
+    * `this`의 값을 영원히 바꿀 수 있다.
+    * `fun.bind(thisArg[, arg1[, arg2[, ...]]])`
+
+---
+
+
+
+##  상속
+
+
 
 ------
 
-### 참고한 곳
+### 【 참고한 곳 】
 
 - https://velog.io/@afant/Javascript-%EA%BC%AD-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-Prototype%EC%9D%98-%EA%B0%9C%EB%85%90-
 - https://gmlwjd9405.github.io/2019/04/22/javascript-hoisting.html
