@@ -33,7 +33,7 @@
      - var ob = new Object();
      - var ob2 = new Array();
 
-  3. 프로토타입(아래)
+  3. 프로토타입(아래 참고)
 
 ## 프로퍼티(Property)
 
@@ -49,7 +49,7 @@
 - JS는 `프로토타입 기반` 언어(ES6에서는 class 추가)
 - 클래스 없이 프로토타입 체인과 클로저 등으로 상속, 캡슐화 등의 개념 구현
 
-```
+```javascript
 function Person() {
     //2개의 속성
     this.eyes = 2;
@@ -66,7 +66,7 @@ console.log(lee.eyes); //2
 
 => 위 코드는 메모리에 4개가 할당(중복 발생)
 
-```
+```javascript
 function Person() {}
 Person.prototype.eyes = 2;
 Person.prototype.nose = 1;
@@ -94,11 +94,11 @@ console.log(lee.eyes); //2
 
 ## 호이스팅(Hoisting)
 
-- JS는 실행 전 함수 안에 있는 변수들을 모두 `끌어올려서` 최상단에 선언한다.
+- JS는 실행 전 함수 안에 있는 변수들을 모두 끌어올려서 최상단에 선언한다.
 - 호이스팅 대상: var, 함수 선언문
-- `선언만` 끌어올려진다.
+- 선언만 끌어올려진다.
 
-```
+```javascript
 console.log(tmp); //hello가 아닌 undefined 출력
 var tmp = "hello";
 ```
@@ -107,7 +107,7 @@ var tmp = "hello";
 - 가독성과 유지보수를 위해 호이스팅이 일어나지 않도록 한다.
 - 함수 선언문
 
-```
+```javascript
 function foo() {
     console.log("hello");
 }
@@ -115,7 +115,7 @@ function foo() {
 
 - 함수 표현식
 
-```
+```javascript
 //익명 함수표현식
 var foo2 = function() {
     console.log("hello2");
@@ -133,11 +133,11 @@ var foo3 = function foo3() { // 기명 함수표현식
 
 ## var, let, const
 
-- var에서는 호이스팅 발생(ES5)
-- let, const에서는 호이스팅이 발생하지 않는다(ES6)
+- `var`에서는 호이스팅 발생(ES5)
+- `let, const`에서는 호이스팅이 발생하지 않는다(ES6)
 - var은 function scope, let은 block scope
 
-```
+```javascript
 for(var i = 0; i < 1; i++){
     var name = 'hello javascript';
 }
@@ -146,7 +146,7 @@ alert(name); //for문 내의 변수임에도 출력 가능
 
 ## 정적 유효범위
 
-```
+```javascript
 var i = 5; //전역 변수
  
 function a(){
@@ -167,27 +167,28 @@ a(); //5 출력(정적 유효범위)
 
 ## 클로저(Closure)
 
+- 닫다, 좁히다
 - 스코프 체인(scope chain)
 - 외부함수의 변수에 접근할 수 있는 내부 함수
 - 내부함수가 외부함수의 지역변수에 접근 할 수 있고, 외부함수는 외부함수의 지역변수를 사용하는 내부함수가 소멸될 때까지 소멸되지 않는 특성을 의미한다.
 - 외부함수의 값을 복사하는 것이 아니라, 실제 값을 참조한다. (객체 저장된 값을 그대로 참조)
 
-```
+```javascript
 function outter(){ //외부 함수
 		var title = 'outter title'; 
     function inner(){ //내부 함수
-        alert(title); //outter title 출력, 내부함수에서 외부함수의 지역변수에 접근 가능
+        console.log(title); //outter title 출력, 내부함수에서 외부함수의 지역변수에 접근 가능
     }
     inner();
 }
 outter();
 ```
 
-```
+```javascript
 function outter(){
     var title = 'hello';  
     return function(){ //내부함수 리턴   
-        alert(title);
+        console.log(title);
     }
 }
 var inner = outter(); //없을 경우 ReferenceError 발생
@@ -199,19 +200,36 @@ inner(); //호출 시 hello 출력
 - 클로저 사용하는 이유
   - 안정성
   - 캡슐화, 은닉화(https://meetup.toast.com/posts/90)
+    - Javascript는 접근제어자가 없기 때문이다
 - Q. 클로저 사용하는 경우
-  - 
+
+## IIFE
+
+* 즉시 실행 함수 표현식(Immediately Invoked Function Expressions)
+* 즉시 실행되어 값으로 평가되는 함수
+* 괄호`()`로 둘러싸인 익명함수와 즉시 실행 함수를 생성하는 괄호로 구성된다.
+
+```javascript
+(function () {
+    statements
+})();
+```
+
+* 언제 사용되는지?
+  * **private scope(private state)**를 만들기 위해 사용한다.
+  * 젼역 영역(Global Scope)를 오염 시키지 않기 위해서 사용한다.
+  * 변수와 메소드를 외부 접근으로부터 보호한다.
 
 ------
 
-## callback
+## Callback
 
 ### * 함수의 용도
 
-```
+```javascript
 function a(){ } //함수
 a = {
-    b: function(){ //b=key, function=value
+    b: function(){ //b는 key, function은 value
     }
 };
 ```
@@ -220,7 +238,7 @@ a = {
 
 - 함수는 `변수, 매개변수, 리턴값, 배열의 값` 등으로 다양한 용도로 사용될 수 있다.
 
-```
+```javascript
 function cal(mode){
     var funcs = {
         'plus' : function(left, right){return left + right},
@@ -232,7 +250,7 @@ console.log(cal('plus')(2,1)); //3
 console.log(cal('minus')(2,1)); //1
 ```
 
-```
+```javascript
 var process = [
     function(input){ return input + 10;},
     function(input){ return input * input;},
@@ -251,7 +269,7 @@ console.log(input); //11, 121, 60.5
 - 값으로 사용될 수 있는 특성을 이용하면 `함수의 인자로 함수를 전달`할 수 있다.
 - 값으로서 함수를 사용
 
-```
+```javascript
 function sortNumber(a,b){
     return b-a;
 }
@@ -271,7 +289,7 @@ alert(numbers.sort(sortNumber)); // array, [20,10,9,8,7,6,5,4,3,2,1]
 
   - Ajax
 
-  ```
+  ```javascript
   function getData() {
   	var tableData;
   	$.get('https://domain.com/products/1', function(response) {
@@ -301,14 +319,14 @@ alert(numbers.sort(sortNumber)); // array, [20,10,9,8,7,6,5,4,3,2,1]
     - 애니메이션을 위한 전용 함수(setTimeout, setInterval의 대안으로 나온 것
     - 자바스크립트로 복잡한 애니메이션처리를 처리해야 할 때 사용
 
-    ```
+    ```javascript
     function updateScreen(time) {
       // Make visual updates here.
     }
     window.requestAnimationFrame(updateScreen);
     ```
 
-    ```
+    ```javascript
     var count = 0;
     var el = document.querySelector(".outside");
     el.style.left = "0px";
@@ -332,13 +350,31 @@ alert(numbers.sort(sortNumber)); // array, [20,10,9,8,7,6,5,4,3,2,1]
 
 ------
 
+## 모듈화
+
+* 스코프(Scope): 모든 모듈은 자신만의 독립적인 실행 영역이 있어야 한다.
+  * 전역변수와 지역변수의 분리
+* 정의(Definition): 모듈 정의는 `exports 객체`를 이용한다.
+* 사용(Usage): 모듈 사용은 `require 함수`를 이용한다.
+* 사용 이유
+  * 전역변수로 인한 충돌 방지
+  * 유지 보수성 향상
+
+## AMD
+
+* `Asynchronous Module Definition`
+* 비동기적 모듈 선언
+* 모듈을 정의하는 방법과 모듈이 필요할 때 비동기로 로딩하는 방법을 정의한 API
+
 ## requirejs 
 
+* AMD API 명세를 구현한 구현체
+* 사용 이유
+  * 모듈 단위 개발에 용이
+  * 모듈 간의 의존도를 낮추고, 재사용성을 높일 수 있다.
+  * 동적인 로딩이 가능하다. (첫 로딩에 필요하지 않은 모듈은 나중에 비동기 형태로 가져온다)
+
 ## commonjs
-
-------
-
-## iife
 
 ------
 
@@ -356,3 +392,4 @@ alert(numbers.sort(sortNumber)); // array, [20,10,9,8,7,6,5,4,3,2,1]
 - https://gmlwjd9405.github.io/2019/04/22/javascript-hoisting.html
 - https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Closures
 - https://opentutorials.org
+- https://d2.naver.com/helloworld/12864
