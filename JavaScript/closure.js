@@ -14,6 +14,7 @@ init();
 //init() 함수 본문에서만 사용 가능
 //displayName();
 
+
 //case 2
 function makeFunc() {
     var name = "hello 2";
@@ -36,6 +37,7 @@ myFunc();
 * 유효범위(X), 리턴 함수가 클로저를 형성(O)
 */
 
+
 //case 3
 function makeAdder(x) {
     var y = 1;
@@ -45,8 +47,31 @@ function makeAdder(x) {
     };
 }
 
+//add5, add10 TYPE은 function
+/* add5는
+* ƒ(z) {
+        y = 100;
+        return x + y + z;
+    }
+*/
 var add5 = makeAdder(5);
 var add10 = makeAdder(10);
 
 console.log(add5(2)); //5 + 100 + 2 = 107
 console.log(add10(2)); //10 + 100 + 2 = 112
+
+
+//case 4: 클로저를 통한 은닉화
+//외부에서 _name에 접근할 수 없게 된다.
+function hello(name) {
+    var _name = name;
+    return function() {
+        console.log('hello '+_name);
+    };
+}
+
+var hello1 = hello(1);
+var hello2 = hello(2);
+
+hello1();
+hello2();
