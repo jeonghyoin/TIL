@@ -35,7 +35,7 @@ console.log(foo_instance.proto_val === Foo.prototype.proto_val); //false
 foo_instance.proto_val ="다시 변경된 값";
 console.log("----------");
 console.log(foo_instance.__proto__.proto_val); //원형 값
-console.log(foo_instance.proto_val); //변경 값
+console.log(foo_instance.proto_val); //변경 값 -> 다시 변경된 값
 
 //원형 값 바꾸기
 //Foo로 부터 생성된 객체는 다른 값을 가지게 됨
