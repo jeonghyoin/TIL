@@ -125,3 +125,5 @@ console.log(goo);
 
 https://victorydntmd.tistory.com/52?category=704012
 
+[https://medium.com/@han7096/javascript-core-3-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85-prototype-c2da4c24820e](https://medium.com/@han7096/javascript-core-3-프로토타입-prototype-c2da4c24820e)
+
