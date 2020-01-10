@@ -239,7 +239,7 @@ inner(); //호출 시 hello 출력
 ### * 함수의 용도
 
 ```javascript
-function a(){ } //함수
+function a() {} //함수
 a = {
     b: function(){ //b는 key, function은 value
     }
@@ -253,8 +253,12 @@ a = {
 ```javascript
 function cal(mode){
     var funcs = {
-        'plus' : function(left, right){return left + right},
-        'minus' : function(left, right){return left - right}
+        'plus' : function(left, right) {
+            return left + right
+        },
+        'minus' : function(left, right) {
+            return left - right
+        }
     }
     return funcs[mode]; //반환 값으로 함수 사용
 }
@@ -263,10 +267,16 @@ console.log(cal('minus')(2,1)); //1
 ```
 
 ```javascript
-var process = [
-    function(input){ return input + 10;},
-    function(input){ return input * input;},
-    function(input){ return input / 2;}
+var process = [ //배열로 선언
+    function(input) { //index 0
+        return input + 10;
+    },
+    function(input) { //index 1
+        return input * input;
+    },
+    function(input) { //index 2
+        return input / 2;
+    }
 ];
 
 var input = 1;
@@ -286,7 +296,7 @@ function sortNumber(a,b){
     return b-a;
 }
 var numbers = [20,10,9,8,7,6,5,4,3,2,1];
-alert(numbers.sort(sortNumber)); // array, [20,10,9,8,7,6,5,4,3,2,1]
+alert(numbers.sort(sortNumber)); //array, [20,10,9,8,7,6,5,4,3,2,1]
 ```
 
 => 여기에서 sortNumber는 `콜백 함수`이다.
@@ -320,22 +330,26 @@ alert(numbers.sort(sortNumber)); // array, [20,10,9,8,7,6,5,4,3,2,1]
 
     ```javascript
     console.log('Hello'); //1번째
+    
     setTimeout(function() {
     	console.log('Bye'); //3번째
     }, 3000); //3초만큼 기다렸다가 실행
-    console.log('Hello Again'); //2번째
+    
     ```
 
+  console.log('Hello Again'); //2번째
+
+    ```
   - requestAnimationFrame
-
-    - 애니메이션을 위한 전용 함수(setTimeout, setInterval의 대안으로 나온 것
+  
+  - 애니메이션을 위한 전용 함수(setTimeout, setInterval의 대안으로 나온 것)
     - 자바스크립트로 복잡한 애니메이션처리를 처리해야 할 때 사용
-
+  
     ```javascript
     function updateScreen(time) {
-      // Make visual updates here.
+      //Make visual updates here.
     }
-    window.requestAnimationFrame(updateScreen);
+  window.requestAnimationFrame(updateScreen);
     ```
 
     ```javascript
@@ -350,7 +364,7 @@ alert(numbers.sort(sortNumber)); // array, [20,10,9,8,7,6,5,4,3,2,1]
        requestAnimationFrame(run);
     }
     
-    requestAnimationFrame(run);
+  requestAnimationFrame(run);
     ```
 
     - setTimeout
@@ -456,22 +470,19 @@ alert(numbers.sort(sortNumber)); // array, [20,10,9,8,7,6,5,4,3,2,1]
     * `call, apply`와의 차이점
       * `apply`는 매개변수를 배열로 받는다.
       * `fun.call(thisArg[, arg1[, arg2[, ...]]])`
+        * `thisArg`는 현재 객체로 사용될 객체
+        * `arg1, arg2...`는 메소드에 전달될 인수 목록
       * `fun.apply(thisArg, [argsArray])`
-        * `thisArg`는 `func` 를 호출하는데 제공될 `this` 의 값
+        * `thisArg`는 `func` 를 호출하는데 제공될 `this` 의 값(객체)
         * `argsArray`는 `func` 이 호출되어야 하는 인수를 지정하는 유사 배열 객체
 
   - **bind**
 
     * `this`의 값을 영원히 바꿀 수 있다.
+    * `call(), apply()`는 즉시 함수 호출, `bind()`는 실행될 때 사용
     * `fun.bind(thisArg[, arg1[, arg2[, ...]]])`
 
----
-
-
-
-##  상속
-
-
+  
 
 ------
 
