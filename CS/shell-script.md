@@ -28,7 +28,7 @@ cp *.log bak
 ```
 
 1. 현재 디랙토리에 bak라는 디렉토리가 없다면 만들고, 있다면 만들지 않는다.
-2. 현재 디렉토리에 있는 모든 파일 중에 .log로 끝나는 모든 파일을 bak 디렉토리로 복사한다.
+2. 현재 디렉토리에 있는 모든 파일 중에 `.log`로 끝나는 모든 파일을 bak 디렉토리로 복사한다.
 3. `fi`: 조건문의 종료
 
 ## * 작성 방법
@@ -42,7 +42,7 @@ $ ./test.sh //쉘 스크립트 실행
 
 쉘 스크립트를 작성하기 위해 스크립트 최상단에 `#!/bin/bash` 를 추가한다.
 
-- 출력: `echo`(자동 줄바꿈), printf
+- 출력: `echo`(자동 줄바꿈), `printf`
   - `printf "%s %s" hello world`
 - 주석: #
 - 함수
@@ -131,7 +131,7 @@ string_test "hello" "world"
 
 - 배열
   - `daemons=("var1" "var2" "var3")`
-  - ${daemons[@]}  로 배열에 접근한다.
+  - `${daemons[@]}`  로 배열에 접근한다.
 - 반복문
   - 반복문을 빠져 나갈 때 `break`
   - 현재 반복문이나 조건을 건너 뛸 때 `continue`
@@ -150,6 +150,13 @@ do
 done
 ```
 
+```shell
+# file.txt 파일 읽기
+for var in 'cat /root/bin/file.txt'; do
+    echo $var
+done
+```
+
 - 조건문
 
 ```shell
@@ -161,7 +168,19 @@ else
 fi
 ```
 
+```shell
+string1="hello"
+string2="world"
+string3="hello world"
 
+if [ ${string1} == ${string2} ]; then
+	echo "hello"
+elif [ ${string1} == ${string3} ]; then
+	echo "world"
+else
+	echo "hello world"
+fi
+```
 
 ------
 
