@@ -50,6 +50,35 @@
 
 ![img](https://t1.daumcdn.net/cfile/tistory/995EC2345B53368912)
 
+## Refresh Token
+안전하게 **토큰 기반의 인증**을 진행하기 위해 사용한다. 토큰의 사용 기간을 길게 주면 토큰 탈취의 위험성이 있다. 그렇다고 토큰 기간을 짧게 주면 사용자에게 계속해서 로그인을 요청해야만 한다.
+이러한 토큰 기반 인증의 단점을 보완하고자 사용한다.
+
+### 적용 방법
+1. 유효기간이 짧은 Access Token을 발급한다.
+2. 유효기간이 만료되면, 로그인을 요청하는 것이 아닌 Refresh 토큰을 이용해 토큰을 재발행한다.
+3. 고려 사항
+	- 클라이언트 Cookie에 보관되는 Access Token과 달리, Refresh Token은 토큰 재발행만을 위한 용도로, 서버 측에 저장해두고 사용한다.
+	- Access Token이 중간에 탈취된다고 하더라도, 짧은 시간 동안만 유효하므로 공격을 막을 수 있다.
+	- 최초 Token 발급 시에 Access, Refresh Token 2개를 발급한다.
+	- Access Token이 만료되었는지 판단하는 방법은 `TokenExpiredError`가 발생했을 때를 기준으로 한다.
+	- Access Token이 만료되면 사용자에게 재로그인을 요청한다.
+~~~
+{  "code":401,  "error":"invalid_token",  "error_description":"The access token provided has expired."  }
+~~~
+
+
+![refresh_token](https://swalloow.github.io/assets/images/refresh%20token.png)
+
+---
+
+## 토큰 방식의 인증 구현 시 주의점
+1. 토큰 자체가 정보라는 점에 주의해야 한다.
+	> Payload 부분은 토큰에 바디에 해당한다. 여기에 정보가 담기게 되는데, 이 정보는 암호화된 것이 아니라 단순히 JSON 문자열을 **base64 인코딩**한 것 뿐이다. 누구나 디코딩하여 토큰에 어떠한 값이 담겨있는지 알 수 있다. 따라서 이 부분에 중요 정보를 담아서는 안된다.
+2. 토큰의 바디에 너무 많은 정보를 담아서는 안된다.
+3. 클라이언트의 토큰을 강제로 만료시킬 수 없다.
+	> 토큰 발급 시에 토큰에 대한 유효 기간이 설정된다. 이는 로그아웃을 하더라도 토큰 값은 계속해서 유효하다는 것을 의미한다. 따라서, 탈취를 고려하여 토큰 유효기간을 짧게 설정하는 것이 중요하다.
+
 ---
 
 ### 참고한 곳
@@ -58,3 +87,5 @@
 - https://dooopark.tistory.com/6
 - https://velopert.com/2350
 - https://codeflow.study/web-deprecated/79?comment=390
+- https://swalloow.github.io/implement-jwt)
+- https://velog.io/@tlatldms/%EC%84%9C%EB%B2%84%EA%B0%9C%EB%B0%9C%EC%BA%A0%ED%94%84-Refresh-JWT-%EA%B5%AC%ED%98%84
