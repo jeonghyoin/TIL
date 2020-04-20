@@ -87,7 +87,9 @@
 	- 환경에 맞게 지정한 파일들을 포함해서 패키징한다.
 	- 설정 파일 등을 폴더에 넣어두고 환경에 맞게 -P 옵션으로 세팅할 수 있다.
 	- 예) `mvn -P local package`
+	
 	![](https://t1.daumcdn.net/cfile/tistory/1313E235516C09041A)
+	
 	~~~xml
 	<project ?xml version="1.0" encoding="UTF-8"?>  
 	<project xmlns="http://maven.apache.org/POM/4.0.0"
