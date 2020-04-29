@@ -34,10 +34,10 @@ cp *.log bak
 ## * 작성 방법
 
 ```shell
-$ touch test.sh //파일 생성
-$ vim test.sh //편집기로 파일 열기
-$ chmod +x test.sh //실행 권한 부여
-$ ./test.sh //쉘 스크립트 실행
+$ touch test.sh // 파일 생성
+$ vim test.sh // 편집기로 파일 열기
+$ chmod +x test.sh // 실행 권한 부여
+$ ./test.sh // 쉘 스크립트 실행
 ```
 
 쉘 스크립트를 작성하기 위해 스크립트 최상단에 `#!/bin/bash` 를 추가한다.
@@ -97,7 +97,7 @@ string_test "hello" "world"
 | `HISTSIZE`      | `history` 저장되는 개수                                      |
 | `HISTCONTROL`   | 중복되는 명령에 대한 기록 유무                               |
 | `DISPLAY`       | X 디스플레이 이름                                            |
-| `IFS`           | 입력 필드 구분자(기본값: ` ` - 빈칸)                         |
+| `IFS`           | 입력 필드 구분자(기본값: 빈칸)                                |
 | `VISUAL`        | VISUAL 편집기 이름                                           |
 | `EDITOR`        | 기본 편집기 이름                                             |
 | `COLUMNS`       | 현재 터미널이나 윈도우 터미널의 컬럼 수                      |
@@ -182,10 +182,43 @@ else
 fi
 ```
 
+---
+
+## * 옵션
+* 산술 비교 연산자
+1. `val1 –eq val2` : equal, 변수 val1과 변수 val2 같은 경우 true  
+2. `val1 –ne val2` : negative, 변수 val1과 변수 val2 다른 경우 true  
+3. `val1 –gt val2` : greater then, 변수 val1이 변수 val2 보다 큰 경우 true  
+4. `val1 –lt val2` : less then, 변수 val1이 변수 val2 보다 작은 경우 true  
+5. `val1 –ge val2` : greater or equal, 변수 val1이 변수 val2 보다 크거나 같은 경우 true  
+6. `val1 –le val2` : less or equal, 변수 val1이 변수 val2 보다 작거나 가은 경우 true
+
+* 파일 검사 연산자
+7. `a` : 파일이 존재한 경우 true  
+8. `-b` : 파일이 존재하고 블록장치 파일인 경우 true  
+9. `-c` : 파일이 존재하고 캐릭터 장치 파일인 경우 true  
+10. `-d` : 파일이 존재하고 디렉토리인 경우 true  
+11. `-e` : 파일이 존재하고 파일이 있는 경우 true  
+12. `-f` : 파일이 존재하고 정규 파일인 경우 true  
+13. `-g` : 파일이 존재하고 SetGID가 설정된 경우 true  
+14. `-h` : 파일이 존재하고 한 개 이상의 심볼릭 링크가 설정된 경우 true  
+15. `-k` : 파일이 존재하고 Sticky bit가 설정된 경우 true  
+16. `-p` : 파일이 존재하고 FIFO인 경우 true  
+17. `-r` : 파일이 존재하고 읽기 가능한 경우 true  
+18. `-s` : 파일이 존재하고 0보다 큰 경우 true  
+19. `-u` : 파일이 존재하고 SetUID가 설정된 경우 true  
+20. `-w` : 파일이 존재하고 쓰기가 가능한 경우 true  
+21. `-x` : 파일이 존재하고 실행 가능한 경우 true
+
+* 문자열 비교 연산자
+1. `-z string` : 문자열의 길이가 0인 경우 true  
+2. `-n string` : 문자열의 길이가 0이 아닌 경우 true  
+3. `string1 = string2` : 문자열 string1과 string2가 일치하는 경우  
+4. `string1 != string2` : 문자열 string1과 string2가 일치하지 않는 경우  
+5. `String` : 문자열이 NULL이 아닌 경우
+
 ------
 
 ### 【 참고한 곳 】
-
-https://blog.gaerae.com/2015/01/bash-hello-world.html
-
-https://opentutorials.org/
+- https://blog.gaerae.com/2015/01/bash-hello-world.html
+- https://opentutorials.org/
